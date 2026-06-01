@@ -5,8 +5,13 @@
     : location.pathname.replace(/\/[^/]*$/, "/");
 
   function toLocalUrl(src) {
-    if (!src || src.indexOf(ossOrigin) !== 0) return src;
-    return basePath + "oss/" + src.slice(ossOrigin.length);
+    if (!src) return src;
+    if (src.indexOf(ossOrigin) === 0) return basePath + "oss/" + src.slice(ossOrigin.length);
+    if (src.indexOf(location.origin + "/static/") === 0) return basePath + src.slice(location.origin.length + 1);
+    if (src.indexOf("/static/") === 0) return basePath + src.slice(1);
+    if (src.indexOf("static/") === 0) return basePath + src;
+    if (src.indexOf(location.origin + "/classone-kaspi-pay-demo/static/") === 0) return src;
+    return src;
   }
 
   function localizeImage(img) {

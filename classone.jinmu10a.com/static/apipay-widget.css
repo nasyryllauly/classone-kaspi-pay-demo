@@ -1,0 +1,210 @@
+.kaspi-pay-launcher,
+.kaspi-pay-modal,
+.kaspi-pay-modal * {
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+}
+
+.kaspi-pay-launcher {
+  position: fixed;
+  right: 16px;
+  bottom: 86px;
+  z-index: 100000;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 0;
+  border-radius: 999px;
+  padding: 12px 16px;
+  color: #fff;
+  background: #d71920;
+  box-shadow: 0 12px 28px rgba(161, 18, 24, .28);
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.kaspi-pay-launcher::before {
+  content: "";
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: inset 0 0 0 5px #d71920;
+}
+
+.kaspi-pay-modal[hidden] {
+  display: none;
+}
+
+.kaspi-pay-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100001;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  background: rgba(15, 23, 42, .52);
+}
+
+.kaspi-pay-panel {
+  width: min(430px, 100%);
+  max-height: min(760px, 94vh);
+  overflow: auto;
+  border-radius: 8px;
+  background: #fff;
+  color: #111827;
+  box-shadow: 0 24px 80px rgba(15, 23, 42, .28);
+}
+
+.kaspi-pay-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 18px 12px;
+  border-bottom: 1px solid #eef0f3;
+}
+
+.kaspi-pay-title {
+  margin: 0;
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.kaspi-pay-subtitle {
+  margin: 6px 0 0;
+  color: #6b7280;
+  font-size: 13px;
+}
+
+.kaspi-pay-close {
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 50%;
+  background: #f3f4f6;
+  color: #374151;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.kaspi-pay-body {
+  display: grid;
+  gap: 14px;
+  padding: 16px 18px 18px;
+}
+
+.kaspi-pay-field {
+  display: grid;
+  gap: 6px;
+  color: #374151;
+  font-size: 13px;
+}
+
+.kaspi-pay-field input {
+  width: 100%;
+  border: 1px solid #d7dce3;
+  border-radius: 6px;
+  padding: 11px 12px;
+  font-size: 16px;
+  outline: none;
+}
+
+.kaspi-pay-field input:focus {
+  border-color: #d71920;
+  box-shadow: 0 0 0 3px rgba(215, 25, 32, .12);
+}
+
+.kaspi-pay-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.kaspi-pay-primary,
+.kaspi-pay-secondary {
+  min-height: 44px;
+  border: 0;
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.kaspi-pay-primary {
+  color: #fff;
+  background: #d71920;
+}
+
+.kaspi-pay-secondary {
+  color: #111827;
+  background: #eef0f3;
+}
+
+.kaspi-pay-result {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  min-height: 48px;
+  border-radius: 8px;
+  padding: 14px;
+  background: #f8fafc;
+  color: #374151;
+  text-align: center;
+  font-size: 14px;
+}
+
+.kaspi-pay-result img {
+  width: 210px;
+  max-width: 100%;
+  aspect-ratio: 1;
+  border: 8px solid #fff;
+  border-radius: 8px;
+  box-shadow: 0 10px 28px rgba(15, 23, 42, .14);
+}
+
+.kaspi-pay-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 28px;
+  border-radius: 999px;
+  padding: 4px 10px;
+  background: #fff;
+  color: #374151;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.kaspi-pay-status.is-paid {
+  color: #047857;
+  background: #d1fae5;
+}
+
+.kaspi-pay-link {
+  color: #d71920;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.kaspi-pay-note {
+  margin: 0;
+  color: #6b7280;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+@media (max-width: 420px) {
+  .kaspi-pay-launcher {
+    right: 12px;
+    bottom: 76px;
+    padding: 11px 13px;
+    font-size: 14px;
+  }
+
+  .kaspi-pay-actions {
+    grid-template-columns: 1fr;
+  }
+}

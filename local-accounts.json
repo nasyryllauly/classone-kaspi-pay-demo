@@ -1,0 +1,21 @@
+{
+  "accounts": [
+    {
+      "user_id": 7076601087,
+      "user_mobile": "7076601087",
+      "phone": "7076601087",
+      "area_code": "007",
+      "first_name": "Мадияр",
+      "last_name": "Жанабаев",
+      "nickname": "Жанабаев Мадияр",
+      "real_name": "Жанабаев Мадияр",
+      "registered_location": 1,
+      "user_token": "local-test-token-7076601087",
+      "avatar": "/static/images/tabbar/10a/my.png",
+      "level_name": "Тестовый аккаунт",
+      "integral": "0.00",
+      "balance": "0.00",
+      "full_name": "Жанабаев Мадияр"
+    }
+  ]
+}

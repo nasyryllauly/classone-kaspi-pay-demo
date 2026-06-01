@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: classone-apipay-backend
+    runtime: docker
+    plan: starter
+    envVars:
+      - key: APIPAY_API_KEY
+        sync: false
+      - key: APIPAY_BASE_URL
+        value: https://bpapi.bazarbay.site/api/v1
+      - key: APIPAY_ALLOWED_ORIGIN
+        value: https://nasyryllauly.github.io
+      - key: CLASSONE_ALLOW_LIVE_WRITES
+        value: "0"

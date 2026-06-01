@@ -11,6 +11,7 @@ const cdnRoot = path.join(__dirname, "cdn.dcloud.net.cn");
 const apiBaseUrl = process.env.APIPAY_BASE_URL || "https://bpapi.bazarbay.site/api/v1";
 const apiKey = process.env.APIPAY_API_KEY || "";
 const port = Number(process.env.PORT || 4173);
+const allowedOrigin = process.env.APIPAY_ALLOWED_ORIGIN || "*";
 const mockInvoices = new Map();
 const apiCacheRoot = path.join(__dirname, "api-cache");
 const localAccountsFile = path.join(__dirname, "local-accounts.json");
@@ -52,9 +53,24 @@ function loadDotEnv(filePath) {
 function sendJson(res, statusCode, body) {
   res.writeHead(statusCode, {
     "content-type": "application/json; charset=utf-8",
-    "cache-control": "no-store"
+    "cache-control": "no-store",
+    "access-control-allow-origin": allowedOrigin,
+    "access-control-allow-methods": "GET,POST,OPTIONS",
+    "access-control-allow-headers": "content-type",
+    "vary": "Origin"
   });
   res.end(JSON.stringify(body));
+}
+
+function sendCorsPreflight(res) {
+  res.writeHead(204, {
+    "access-control-allow-origin": allowedOrigin,
+    "access-control-allow-methods": "GET,POST,OPTIONS",
+    "access-control-allow-headers": "content-type",
+    "access-control-max-age": "86400",
+    "vary": "Origin"
+  });
+  res.end();
 }
 
 function readBody(req) {
@@ -157,6 +173,16 @@ function createMockInvoice(payload, kind) {
 
 async function handleApi(req, res, url) {
   try {
+    if (req.method === "OPTIONS") return sendCorsPreflight(res);
+
+    if (url.pathname === "/api/apipay/health" && req.method === "GET") {
+      return sendJson(res, 200, {
+        ok: true,
+        mode: process.env.APIPAY_API_KEY ? "live" : "demo",
+        apiBaseUrl
+      });
+    }
+
     if (url.pathname === "/api/apipay/config" && req.method === "GET") {
       return sendJson(res, 200, {
         mode: process.env.APIPAY_API_KEY ? "live" : "demo",

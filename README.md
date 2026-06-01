@@ -56,6 +56,8 @@ Create `.env.local`:
 
 ```bash
 APIPAY_API_KEY=your_api_key_here
+APIPAY_BASE_URL=https://bpapi.bazarbay.site/api/v1
+APIPAY_ALLOWED_ORIGIN=https://nasyryllauly.github.io
 ```
 
 Optional sandbox setting:
@@ -71,3 +73,24 @@ The local server keeps the API key private and calls:
 - `GET https://bpapi.bazarbay.site/api/v1/invoices/{id}`
 
 Without `APIPAY_API_KEY`, the site runs in demo mode so the payment video can show the full flow without charging a real customer.
+
+## Real payments on GitHub Pages
+
+GitHub Pages cannot store `APIPAY_API_KEY`, so real payments require a backend deployment of `server.js`.
+
+1. Deploy this repository as a web service with `Dockerfile` or `render.yaml`.
+2. Set `APIPAY_API_KEY` in the backend environment.
+3. Put the backend URL into `classone.jinmu10a.com/static/classone-apipay-config.js`:
+
+```js
+window.CLASSONE_APIPAY = {
+  backendUrl: "https://your-backend.example.com",
+  allowStaticDemoFallback: false
+};
+```
+
+After that, the public site creates real ApiPay invoices through:
+
+- `POST {backendUrl}/api/apipay/qr`
+- `POST {backendUrl}/api/apipay/phone`
+- `GET {backendUrl}/api/apipay/invoices/{id}`

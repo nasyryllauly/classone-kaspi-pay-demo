@@ -7,7 +7,11 @@
   }
 
   function request(path, options) {
-    return fetch(path, Object.assign({
+    var config = window.CLASSONE_APIPAY || {};
+    var backendUrl = String(config.backendUrl || "").replace(/\/+$/, "");
+    var url = backendUrl ? backendUrl + path : path;
+
+    return fetch(url, Object.assign({
       headers: { "content-type": "application/json" }
     }, options || {})).then(function (response) {
       return response.json().then(function (data) {
@@ -18,7 +22,9 @@
         return data;
       });
     }).catch(function (error) {
-      if (path.indexOf("/api/apipay/") === 0) return staticDemoRequest(path, options, error);
+      if (!backendUrl && config.allowStaticDemoFallback !== false && path.indexOf("/api/apipay/") === 0) {
+        return staticDemoRequest(path, options, error);
+      }
       throw error;
     });
   }
